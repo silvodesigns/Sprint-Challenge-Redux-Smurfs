@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import SmurfsList from './SmurfsList';
 import { getSmurfs } from '../actions';
 
 import './App.css';
@@ -19,36 +20,46 @@ import './App.css';
 
 
 class App extends Component {
+  constructor(props){
+    super(props);
+  }
 
 
   componentDidMount() {
     this.props.getSmurfs();
-    console.log(this.props, "from inside app componentdidmount");
-
+    console.log(this.props,"from component did mount");
+   
   }
 
   
-  render() {
-  
+render() {
+  let list;
+
+  if(this.props.smurfs){
+   list =  <SmurfsList characters={this.props.smurfs}/>
+  }
+
+
     return (
       <div className="App">
         <h1>SMURFS! 2.0 W/ Redux</h1>
         <div>Welcome to your Redux version of Smurfs!</div>
         <div>Start inside of your `src/index.js` file!</div>
-        <div></div>
+        {list}
+    
+       
+       
+       
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  console.log(state,"map to state");
-  return{
-    name: state.smurfs.name,
-    age: state.smurfs.age,
-    height: state.smurfs.height,
-    id: state.smurfs.id
+  console.log(state,"what is state");
+return{
+  smurfs: state.smurfs
   }
-}
+};
 
 export default connect(mapStateToProps,{getSmurfs} )(App);

@@ -36,8 +36,10 @@ const initialState =  {
   Components can then read your store as, `state` and not `state.fooReducer`.
 */
 
-export default function reducer(state = initialState, action) {
-  console.log(action,"initial state");
+export const reducer = (state = initialState, action)  => {
+
+  
+
   switch (action.type) {
     case FETCH_SMURF_START:
       return {
@@ -50,7 +52,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         fetchingSmurfs: false,
         error: "",
-        smurfs: action.payload
+        smurfs: [...state.smurfs, ...action.payload]
 
       };
       case FETCH_SMURF_FAIL:
@@ -62,7 +64,7 @@ export default function reducer(state = initialState, action) {
     default:
       return state;
   }
-  console.log(action,"final state");
+
 }
 
 

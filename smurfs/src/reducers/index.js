@@ -3,6 +3,9 @@
 */
 
 import { FETCH_SMURF_START } from  '../actions';
+import { FETCH_SMURF_FAIL } from  '../actions';
+import { FETCH_SMURF_SUCCESS } from  '../actions';
+// import { FETCH_SMURF_POST } from  '../actions';
 
 /*
  Your initial/default state for this project could *Although does not have to* look a lot like this
@@ -33,8 +36,8 @@ const initialState =  {
   Components can then read your store as, `state` and not `state.fooReducer`.
 */
 
-function reducer(state = initialState, action) {
-  console.log("reducer", action);
+export default function reducer(state = initialState, action) {
+  console.log(action,"initial state");
   switch (action.type) {
     case FETCH_SMURF_START:
       return {
@@ -42,9 +45,24 @@ function reducer(state = initialState, action) {
         fetchingSmurfs: true,
         error: ""
       };
+      case FETCH_SMURF_SUCCESS:
+      return {
+        ...state,
+        fetchingSmurfs: false,
+        error: "",
+        smurfs: action.payload
+
+      };
+      case FETCH_SMURF_FAIL:
+      return {
+        ...state,
+        fetchingSmurfs:false ,
+        error: action.payload
+      };
     default:
       return state;
   }
+  console.log(action,"final state");
 }
 
-export default reducer;
+

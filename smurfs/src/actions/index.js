@@ -25,12 +25,11 @@ export const FETCH_SMURF_POST ='FETCH_SMURF_POST';
 //reducer function
 export const getSmurfs = () => dispatch => {
   dispatch({type: FETCH_SMURF_START });
-  axios
-    .get("http://localhost:3333/smurfs/")
+  axios.get('http://localhost:3333/smurfs/')
     .then(res =>
-      dispatch({ type: FETCH_SMURF_SUCCESS, payload: res.data.results })
+      dispatch({ type: FETCH_SMURF_SUCCESS, payload: res.data})
     )
-    .catch(err => dispatch({ type: FETCH_SMURG_FAIL, payload: err }));
+    .catch(err => dispatch({ type: FETCH_SMURF_FAIL, payload: err}));
 };
 
 
